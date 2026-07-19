@@ -1,10 +1,9 @@
 /**
- * MY BLOG APP — Blog Page ("marginalia")
- * Compiled from TypeScript. I use this file directly since I don't have TS set up.
+ * BLOG APP - "marginalia"
  */
 
 // ============================================
-// DATA — I edit this array to add/modify posts
+// DATA - edit this array to add/modify posts
 // ============================================
 
 const BLOG_POSTS = [
@@ -86,14 +85,14 @@ const BLOG_POSTS = [
 ];
 
 // ============================================
-// UTILITIES — Helper functions for my blog
+// UTILITIES - helper functions
 // ============================================
 
 const prefersReducedMotion = () => 
   window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 // ============================================
-// CLASSES — Each class handles one feature of my blog
+// CLASSES - each class handles one feature
 // ============================================
 
 class BlogManager {
@@ -122,7 +121,7 @@ class BlogManager {
         const filter = btn.dataset.filter;
         this.activeFilter = filter;
         
-        // Update active state
+        // update active state
         this.filterButtons.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         
@@ -142,12 +141,12 @@ class BlogManager {
   applyFilters() {
     let result = this.posts;
     
-    // Tag filter
+    // tag filter
     if (this.activeFilter !== 'all') {
       result = result.filter(p => p.tags.includes(this.activeFilter));
     }
     
-    // Search filter
+    // search filter
     if (this.searchQuery) {
       result = result.filter(p => 
         p.title.toLowerCase().includes(this.searchQuery) ||
@@ -174,7 +173,7 @@ class BlogManager {
     
     this.grid.innerHTML = posts.map((post, i) => this.createCard(post, i)).join('');
     
-    // Re-attach click handlers
+    // re-attach click handlers
     this.grid.querySelectorAll('.blog-card').forEach((card, i) => {
       card.addEventListener('click', () => {
         window.blogModal.open(posts[i]);
@@ -267,11 +266,11 @@ class BlogModal {
 }
 
 // ============================================
-// INITIALIZATION — Runs when my blog page finishes loading.
+// INITIALIZATION - runs when page finishes loading.
 // ============================================
 
 document.addEventListener('DOMContentLoaded', () => {
-  // DARK MODE TOGGLE: Restores saved preference, then toggles on click.
+  // DARK MODE TOGGLE: restores saved preference, then toggles on click.
   const savedTheme = localStorage.getItem('theme') || 'light';
   document.documentElement.setAttribute('data-theme', savedTheme);
 
@@ -285,7 +284,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Scroll animations for my blog cards
+  // scroll animations for blog cards
   if (!prefersReducedMotion()) {
     const animated = document.querySelectorAll('[data-animate]');
     const observer = new IntersectionObserver((entries) => {
@@ -306,7 +305,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
   
-  // Reading progress bar at the top of my blog page
+  // reading progress bar
   const progressBar = document.querySelector('.reading-progress__bar');
   if (progressBar) {
     window.addEventListener('scroll', () => {
@@ -317,7 +316,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
   
-  // Back-to-top button for my blog page
+  // back-to-top button
   const backToTop = document.getElementById('back-to-top');
   if (backToTop) {
     window.addEventListener('scroll', () => {
@@ -328,7 +327,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
   
-  // Mobile menu for my blog page
+  // mobile menu
   const hamburger = document.getElementById('hamburger');
   const mobileMenu = document.getElementById('mobile-menu');
   if (hamburger && mobileMenu) {
@@ -354,7 +353,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
   
-  // Initialize my blog manager and modal
+  // initialize my blog manager and modal
   window.blogModal = new BlogModal();
   new BlogManager(BLOG_POSTS);
 });

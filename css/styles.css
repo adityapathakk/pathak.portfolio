@@ -1,67 +1,69 @@
 /* ============================================
-   MY PORTFOLIO STYLESHEET (css/styles.css)
+   PORTFOLIO STYLESHEET (css/styles.css)
    ============================================
-   Black & White Editorial Theme
+   black & white editorial theme
 
-   HOW I CUSTOMIZE:
-   - Change colors: I edit the variables in Section 1 below (--bg, --text, etc.)
-   - Change fonts: I update --font-display and --font-body (Section 1)
-   - Change spacing: I adjust --space-xs through --space-xl (Section 1)
-   - Portrait video: See Section 6 (hero__portrait / hero__video)
-   - Responsive breakpoints: See Section 16
+   HOW TO CUSTOMIZE:
+   - change colors: edit the variables in Section 1 below (--bg, --text, etc.)
+   - change fonts: update --font-display and --font-body (Section 1)
+   - change spacing: adjust --space-xs through --space-xl (Section 1)
+   - portrait video: section 6 (hero__portrait/hero__video)
+   - responsive breakpoints: see Section 16
 
    TOC:
-   1. Variables & Theme — Colors, fonts, spacing (I EDIT THESE to customize)
-   2. Reset & Base — Browser reset, body styles
-   3. Typography — Headings, links, text
-   4. Utilities — Skip link, screen-reader-only, container
-   5. Navigation — Top bar, hamburger, mobile menu
-   6. Hero — Full-screen landing with name, tagline, portrait video
-   7. Sections — Background/Experience/Elsewhere section layout
-   8. Background — Bio text styling
-   9. Experience — Job card styling
-   10. Elsewhere / Integrations — Platform card grid
-   11. Blog Page — Blog-specific styles (blog.html)
-   12. Modal — Blog post reader popup
-   13. Footer — Bottom bar with copyright and socials
-   14. Components — Toast, back-to-top, progress bar
-   15. Animations — Keyframe definitions
-   16. Responsive — Media queries for mobile/tablet
-   17. Print — Print stylesheet
+   1. variables & theme - colors, fonts, spacing
+   2. reset & base - Browser reset, body styles
+   3. typography - headings, links, text
+   4. utilities - skip link, screen-reader-only, container
+   5. navigation - top bar, hamburger, mobile menu
+   6. hero - full-screen landing with name, tagline, portrait video
+   7. sections - background/experience/elsewhere section layout
+   8. background - bio text styling
+   9. experience - job card styling
+   10. elsewhere/integrations - platform card grid
+   11. blog page - blog-specific styles (blog.html)
+   12. modal - blog post reader popup
+   13. footer - bottom bar with copyright and socials
+   14. components - toast, back-to-top, progress bar
+   15. animations - keyframe definitions
+   16. responsive - media queries for mobile/tablet
+   17. print - Print stylesheet
    ============================================ */
 
-/* 1. Variables & Theme — I EDIT HERE to change the look of my site */
+/* -----
+1. variables & theme - EDIT HERE to change the look of site
+----- */
 :root {
-  /* COLORS: I change these to customize my color palette */
-  --bg: #ffffff;           /* Page background */
-  --bg-alt: #fafafa;       /* Slightly off-white for alternating sections */
-  --text: #0a0a0a;         /* Main text color (near-black) */
-  --muted: #666666;        /* Secondary text (descriptions, bios) */
-  --light: #999999;        /* Tertiary text (labels, metadata) */
-  --border: #e5e5e5;       /* Borders, dividers, card outlines */
+  /* COLORS */
+  --bg: #ffffff;           /* page bg */
+  --bg-alt: #fafafa;       /* slightly off-white for alternating sections */
+  --text: #0a0a0a;         /* main text color (near-black) */
+  --muted: #666666;        /* secondary text (descriptions, bios) */
+  --light: #999999;        /* tertiary text (labels, metadata) */
+  --border: #e5e5e5;       /* borders, dividers, card outlines */
   
-  /* FONTS: These load from Google Fonts (see index.html <head>) */
+  /* FONTS: load from Google Fonts (see index.html <head>) */
   --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;  /* Headings */
   --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;  /* Body text */
   
-  /* SPACING: Controls margins/padding throughout the site */
+  /* SPACING: margins/padding throughout the site */
   --space-xs: 0.5rem;   /* 8px */
   --space-sm: 1rem;     /* 16px */
   --space-md: 2rem;     /* 32px */
   --space-lg: 4rem;     /* 64px */
   --space-xl: 8rem;     /* 128px — used for hero height and section padding */
   
-  /* EASING: Controls animation smoothness */
+  /* EASING: animation smoothness */
   --ease-out: cubic-bezier(0.25, 0.46, 0.45, 0.94);
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
   
-  /* TRANSITION SPEEDS: How long animations take */
+  /* TRANSITION SPEEDS: how long animations take */
   --transition-fast: 0.2s var(--ease-out);   /* Hovers, focus states */
   --transition-base: 0.4s var(--ease-out);   /* Color changes, borders */
   --transition-slow: 0.8s var(--ease-out);   /* Page transitions, reveals */
 }
 
-/* Dark mode colors — activated by data-theme="dark" on <html> */
+/* dark mode colors - activated by data-theme="dark" on <html> */
 [data-theme="dark"] {
   --bg: #0a0a0a;
   --bg-alt: #111111;
@@ -71,7 +73,7 @@
   --border: #222222;
 }
 
-/* Respect reduced motion preferences */
+/* respect reduced motion preferences */
 @media (prefers-reduced-motion: reduce) {
   :root {
     --transition-fast: 0.01s;
@@ -85,7 +87,9 @@
   }
 }
 
-/* 2. Reset & Base */
+/* -----
+2. reset & base
+----- */
 *, *::before, *::after {
   margin: 0;
   padding: 0;
@@ -108,7 +112,7 @@ body {
   overflow-x: hidden;
 }
 
-/* Subtle grain texture */
+/* subtle grain texture */
 body::before {
   content: '';
   position: fixed;
@@ -129,17 +133,19 @@ body::before {
   outline-offset: 3px;
 }
 
-/* Scrollbar */
+/* scrollbar */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--muted); }
 
-/* Hide scrollbar on the hero so the video occupies full width with no gap */
+/* hide scrollbar on hero so the video occupies full width with no gap */
 .hero::-webkit-scrollbar { display: none; }
 .hero { -ms-overflow-style: none; scrollbar-width: none; }
 
-/* 3. Typography */
+/* -----
+3. typography
+----- */
 h1, h2, h3, h4 {
   font-family: var(--font-display);
   font-weight: 500;
@@ -160,7 +166,9 @@ strong {
   color: var(--text);
 }
 
-/* 4. Utilities */
+/* -----
+4. utilities
+----- */
 .container {
   max-width: 1200px;
   margin: 0 auto;
@@ -197,7 +205,9 @@ strong {
   border: 0;
 }
 
-/* 5. Navigation */
+/* -----
+5. navigation
+----- */
 .nav {
   position: fixed;
   top: 0;
@@ -236,7 +246,7 @@ strong {
   position: relative;
 }
 
-/* DARK MODE TOGGLE: Small icon button next to the logo */
+/* DARK MODE TOGGLE: small icon button next to logo */
 .nav__left {
   display: flex;
   align-items: center;
@@ -265,7 +275,7 @@ strong {
   background: rgba(255, 255, 255, 0.1);
 }
 
-/* Show sun in dark mode, moon in light mode */
+/* sun in dark mode, moon in light mode */
 .theme-toggle__icon--sun  { display: none; }
 .theme-toggle__icon--moon { display: block; }
 [data-theme="dark"] .theme-toggle__icon--sun  { display: block; }
@@ -308,7 +318,7 @@ strong {
   width: 100%;
 }
 
-/* Hamburger */
+/* hamburger */
 .hamburger {
   display: none;
   width: 24px;
@@ -349,7 +359,7 @@ strong {
   transform: rotate(-45deg);
 }
 
-/* Mobile Menu */
+/* mobile menu */
 .mobile-menu {
   position: fixed;
   inset: 0;
@@ -387,7 +397,9 @@ strong {
 .mobile-menu.active .mobile-menu__link:nth-child(3) { transition-delay: 0.2s; }
 .mobile-menu.active .mobile-menu__link:nth-child(4) { transition-delay: 0.25s; }
 
-/* 6. Hero — Full-viewport video with name, typewriter, and scroll indicator overlaid. */
+/* -----
+6. hero - full-viewport video with name, typewriter, and scroll indicator overlaid.
+----- */
 .hero {
   min-height: 100vh;
   display: flex;
@@ -397,7 +409,7 @@ strong {
   width: 100%;
 }
 
-/* TOP HALF: Full-width video wrapper — full viewport height, sticks at top while scrolling. */
+/* top half, full-width video wrapper - sticks at top while scrolling. */
 .hero__video-wrap {
   width: 100%;
   height: 100vh;
@@ -412,12 +424,13 @@ strong {
   object-fit: cover;
   filter: grayscale(100%);
   transition: filter var(--transition-slow);
-  /* FRAME-HOLD EFFECT: Snaps the video through subtle sub-pixel position
-     changes using steps(1). Each step holds the current position for the
-     full duration before jumping to the next — no smooth interpolation.
-     This creates the "burst photo" look: frame stays, then snaps to a
-     slightly different position, mimicking someone rapidly clicking
-     photos while the subject moves. */
+  /* FRAME-HOLD EFFECT: snaps video through subtle sub-pixel position
+    changes using steps(1). each step holds the current position for
+    full duration before jumping to the next - no smooth interpolation.
+    
+    creates "burst photo" look: frame stays, then snaps to a
+    slightly different position, mimicking someone rapidly clicking
+    photos while the subject moves. */
   animation: frame-hold 0.35s steps(1) infinite;
 }
 
@@ -425,10 +438,10 @@ strong {
   filter: grayscale(0%);
 }
 
-/* Frame-hold keyframes: each step shifts the video by sub-pixel amounts
-   in different directions. The discrete jumps between positions create
-   the illusion that each frame is being "held" in place before the next
-   click captures a new position — just like burst-mode photography. */
+/* FRAME-HOLD KEYFRAMES: each step shifts the video by sub-pixel amounts
+  in different directions. discrete jumps between positions create
+  illusion that each frame is being "held" in place before the next
+  click captures a new position - just like burst-mode photography. */
 @keyframes frame-hold {
   0%   { transform: translate(0, 0)       scale(1);     filter: brightness(1)    grayscale(100%); }
   25%  { transform: translate(0.5px, 0)   scale(1.001); filter: brightness(1.01) grayscale(100%); }
@@ -437,9 +450,8 @@ strong {
   100% { transform: translate(0, 0)       scale(1);     filter: brightness(1)    grayscale(100%); }
 }
 
-/* When hovering, the frame-hold keeps running but without grayscale.
-   Animation overrides the hover filter, so I duplicate the keyframes
-   without the grayscale value. */
+/* when hovering, frame-hold keeps running but without grayscale.
+  animation overrides the hover filter, so i duplicate the keyframes without grayscale value. */
 .hero__video-wrap:hover .hero__video {
   animation: frame-hold-color 0.35s steps(1) infinite;
 }
@@ -452,7 +464,7 @@ strong {
   100% { transform: translate(0, 0)       scale(1);     filter: brightness(1); }
 }
 
-/* MY NAME: Overlaid on the video, positioned on the right side. */
+/* NAME: overlaid on video, positioned on right side. */
 .hero__name {
   position: absolute;
   top: 50%;
@@ -467,12 +479,12 @@ strong {
   opacity: 0;
   transform: translateY(calc(-50% + 50px));
   animation: revealUp 1.2s var(--ease-out) 0.2s forwards;
-  /* Subtle text shadow so the name is readable over any video content */
+  /* subtle text shadow so name is readable over video content */
   text-shadow: 0 2px 20px rgba(0,0,0,0.4);
 }
 
-/* TYPEWRITER: Cycles through texts below the name, aligned to the right.
-   Each text types out character by character, pauses, then deletes. */
+/* TYPEWRITER: cycles through texts below name, aligned to the right.
+   each text types out character by character, pauses, then deletes. */
 .hero__typewriter {
   position: absolute;
   top: calc(50% + clamp(3rem, 6vw, 6rem) * 0.9 + 0.75rem);
@@ -487,7 +499,7 @@ strong {
   text-shadow: 0 1px 10px rgba(0,0,0,0.3);
 }
 
-/* Blinking cursor for the typewriter */
+/* blinking cursor for the typewriter */
 .hero__typewriter::after {
   content: '|';
   animation: blink 0.7s steps(1) infinite;
@@ -500,7 +512,7 @@ strong {
   51%, 100% { opacity: 0; }
 }
 
-/* META: Year and availability — positioned bottom-right inside the video. */
+/* META: year & availability - positioned bottom-right inside the video. */
 .hero__meta {
   position: absolute;
   bottom: var(--space-lg);
@@ -520,7 +532,7 @@ strong {
   text-shadow: 0 1px 8px rgba(0,0,0,0.3);
 }
 
-/* SCROLL INDICATOR: Positioned at the very bottom-center of the video. */
+/* SCROLL INDICATOR: positioned at the very bottom-center of the video. */
 .scroll-indicator {
   position: absolute;
   bottom: var(--space-md);
@@ -546,9 +558,11 @@ strong {
   animation: scrollBounce 2s ease infinite;
 }
 
-/* 7. Sections — My section's inner elements use [data-animate] to fade in.
-   The section itself does NOT need opacity:0 because the ScrollAnimator
-   in app.js already handles animating [data-animate] children. */
+/* -----
+7. sections - my section's inner elements use [data-animate] to fade in.
+the section itself does NOT need opacity:0 because the ScrollAnimator
+in app.js already handles animating [data-animate] children.
+----- */
 .section {
   padding: var(--space-xl) var(--space-md);
 }
@@ -590,7 +604,9 @@ strong {
   max-width: 500px;
 }
 
-/* 8. Background */
+/* -----
+8. background
+----- */
 .bio {
   font-size: 1.1rem;
   line-height: 1.85;
@@ -602,10 +618,12 @@ strong {
   margin-top: 1.25rem;
 }
 
-/* 9. Experience — My job cards in a 2-column layout (period | details).
-   Each card has a hover effect: a black line grows across the top,
-   and the card shifts right slightly. To change animation speed,
-   I adjust --transition-base in the variables section. */
+/* -----
+9. experience - job cards in a 2-column layout (period | details).
+each card has a hover effect: a black line grows across the top,
+and the card shifts right slightly. to change animation speed,
+adjust --transition-base in the variables section.
+----- */
 .experience-list {
   display: flex;
   flex-direction: column;
@@ -668,10 +686,12 @@ strong {
   max-width: 480px;
 }
 
-/* 10. Elsewhere / Integrations — Grid of my platform cards.
-   4 columns on desktop, 2 on tablet, 1 on mobile.
-   Each card fills black from bottom on hover. To change grid columns,
-   I edit "grid-template-columns: repeat(4, 1fr)" below. */
+/* -----
+10. elsewhere/integrations - grid of platform cards.
+4 columns on desktop, 2 on tablet, 1 on mobile.
+each card fills black from bottom on hover. to change grid columns,
+edit "grid-template-columns: repeat(4, 1fr)" below.
+----- */
 .integrations-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -747,9 +767,11 @@ strong {
   color: rgba(255,255,255,0.65);
 }
 
-/* 11. Blog Page — Styles for blog.html (the "marginalia" page).
-   These styles only apply to blog.html (which has class="page-blog" on <body>).
-   I can safely edit these without affecting my main portfolio page. */
+/* ----- 
+11. blog page - styles for blog.html (the "marginalia" page).
+these styles only apply to blog.html (which has class="page-blog" on <body>).
+can safely edit these without affecting my main portfolio page.
+----- */
 .page-blog .nav {
   position: relative;
   background: var(--bg);
@@ -879,7 +901,7 @@ strong {
   position: relative;
 }
 
-/* MY BLOG IMAGES: I add blog post images here */
+/* BLOG IMAGES: add blog post images here */
 .blog-card__image img {
   width: 100%;
   height: 100%;
@@ -939,7 +961,7 @@ strong {
   font-size: 1.1rem;
 }
 
-/* Featured post spans full width */
+/* featured post spans full width */
 .blog-card--featured {
   grid-column: 1 / -1;
   display: grid;
@@ -959,7 +981,9 @@ strong {
   }
 }
 
-/* 12. Modal */
+/* -----
+12. modal
+----- */
 .modal-overlay {
   position: fixed;
   inset: 0;
@@ -1072,7 +1096,9 @@ strong {
   color: var(--text);
 }
 
-/* 13. Footer */
+/* -----
+13. footer
+----- */
 .footer {
   border-top: 1px solid var(--border);
   padding: var(--space-lg) var(--space-md);
@@ -1157,7 +1183,9 @@ strong {
   box-shadow: 0 12px 24px -6px rgba(0,0,0,0.15);
 }
 
-/* 14. Components */
+/* -----
+14. components
+----- */
 .reading-progress {
   position: fixed;
   top: 0;
@@ -1230,7 +1258,9 @@ strong {
   transform: translateX(-50%) translateY(0);
 }
 
-/* 15. Animations */
+/* -----
+15. animations
+----- */
 @keyframes revealUp {
   to {
     opacity: 1;
@@ -1248,10 +1278,12 @@ strong {
   50% { transform: translateY(8px); opacity: 0.5; }
 }
 
-/* 16. Responsive — Adapts the layout for different screen sizes.
-   1024px: Tablet — integrations grid goes from 4 to 2 columns
-   768px:  Mobile — hamburger menu, single-column layout, smaller padding
-   480px:  Small phone — even smaller hero name and blog title */
+/* ----- 
+16. responsive - adapts layout for different screen sizes.
+1024px: tablet - integrations grid goes from 4 to 2 columns
+768px:  mobile - hamburger menu, single-column layout, smaller padding
+480px:  small phone - even smaller hero name and blog title
+----- */
 @media (max-width: 1024px) {
   .integrations-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -1337,7 +1369,9 @@ strong {
   }
 }
 
-/* 17. Print */
+/* -----
+17. print
+----- */
 @media print {
   .nav, .footer, .mobile-menu, .reading-progress,
   .back-to-top, .scroll-indicator, .toast {
